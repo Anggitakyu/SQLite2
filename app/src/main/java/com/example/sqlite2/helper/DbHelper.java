@@ -57,7 +57,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public void insert(String nama, String address){
         SQLiteDatabase db = this.getWritableDatabase();
-        String queryinsert = "INSERT INTO "+ TABLE_SQLITE + "(" + nama +"," + address  +") " +
+        String queryinsert = "INSERT INTO "+ TABLE_SQLITE + "(" + COLUMN_NAME +"," + COLUMN_ADDRESS +") " +
                 "VALUES ('" + nama +"','"+address+"')";
         Log.e("insert sqlite",""+queryinsert);
         db.execSQL(queryinsert);

@@ -5,45 +5,53 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.sqlite2.R;
 import com.example.sqlite2.model.Data;
 
-import java.util.Date;
 import java.util.List;
 
-public class Adapter implements ListAdapter {
+public class Adapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
-    private list<Data>items;
+    private List<Data> items;
 
-    public Adapter (Activity activity, List<Data> items){
+    public Adapter(Activity activity,  List<Data> items){
         this.activity = activity;
         this.items = items;
     }
+
     @Override
-    public int getCount(){
+    public int getCount() {
         return items.size();
     }
+
     @Override
-    public Object getItem(int location){
+    public Object getItem(int location) {
         return items.get(location);
     }
+
     @Override
-    public long getItemId(int position){
+    public long getItemId(int position) {
         return position;
     }
+
     @Override
-    public View getView (int position, View convertView, ViewGroup parent){
-        if (inflater == null)
+    public View getView(int position, View convertView, ViewGroup viewGroup) {
+
+        if(inflater == null){
             inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (inflater == null)
+        }
+        if(convertView == null){
             convertView = inflater.inflate(R.layout.list_row, null);
-        TextView id = (TextView) convertView.findViewById(R.id.txt_id);
-        TextView name = (TextView) convertView.findViewById(R.id.nama);
-        TextView address = (TextView) convertView.findViewById(R.id.alamat);
+        }
+
+        TextView id = convertView.findViewById(R.id.id);
+        TextView name = convertView.findViewById(R.id.nama);
+        TextView address = convertView.findViewById(R.id.alamat);
+
         Data data = items.get(position);
         id.setText(data.getId());
         name.setText(data.getName());
@@ -51,4 +59,3 @@ public class Adapter implements ListAdapter {
         return convertView;
     }
 }
-
